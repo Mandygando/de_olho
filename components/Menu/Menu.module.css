@@ -1,0 +1,35 @@
+.menu {
+    background-color: #202632;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+}
+
+.logo {
+    width: 60%;
+}
+
+.containerLogo {
+    display: flex;
+    align-items: center;
+}
+
+.titulo {
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.links {
+    display: flex;
+    gap: 20px;
+}
+
+.link {
+    color: #FFFFFF;
+    font-family: var(--font-textos);
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+}

@@ -1,8 +1,13 @@
-import React from 'react'
+import Menu from '@/components/Menu'
+import React, { Component } from 'react'
 
 const index = () => {
   return (
-    <div>index</div>
+    <>
+    
+      <Menu />
+
+    </>
   )
 }
 
