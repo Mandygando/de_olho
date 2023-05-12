@@ -3,6 +3,9 @@ import React from 'react'
 import styles from './Menu.module.css'
 import logo from './logo.png'
 import Image from 'next/image'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Form } from 'react-bootstrap'
+
 
 const Menu = () => {
   return (
@@ -28,7 +31,20 @@ const Menu = () => {
         <Link href={'/quemsomos'} className={styles.link}>
             Quem Somos
         </Link>
+
+    <Form   variant="" className="d-flex">
+            <Form.Control
+              variant="outline-dark"
+              type="search"
+              placeholder="Search"
+              className="me-2 outline-dark bg-dark"
+              aria-label="Search"
+            />
+          </Form>
+   
     </div>
+ 
+
 </nav>
   )
 }
