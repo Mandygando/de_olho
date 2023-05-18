@@ -21,7 +21,7 @@ const Index = ({ deputados }) => {
       <Pagina>
         <br />
         <Row>
-          <Col md={6} className="text-white ">
+          <Col md={6} className="text-white">
             <h2>
               De Olho nos Gastos:
               <br />
@@ -32,18 +32,25 @@ const Index = ({ deputados }) => {
               Deputados Brasileiros
             </h2>
           </Col>
-          <Col></Col>
         </Row>
-        <br />
-        <Button className="bg-secondary text-white" variant="outline-dark">
-          Explore
-        </Button>
 
-        <section className={styles.deputados}>
+        <br />
+        <Row>
+          <Col md={3}>
+            <Button className="bg-secondary text-white" variant="outline-dark">
+              Explore
+            </Button>
+          </Col>
+        </Row>
+
+        <br />
+        <Row className={styles.deputados}>
           {deputados.map((item) => (
-            <Card key={item.id} nome={item.nome} estado={item.siglaUF} />
+            <Col className="mb-4">
+              <Card nome={item.nome} estado={item.siglaUf} partido={item.siglaPartido} imagem={item.urlFoto} />
+            </Col>
           ))}
-        </section>
+        </Row>
       </Pagina>
     </>
   );

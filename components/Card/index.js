@@ -6,11 +6,11 @@ import { MdWorkspaces } from "react-icons/md";
 import { MdOutlineCallMade } from "react-icons/md";
 import Link from "next/link";
 
-const Card = ({ nome, partido, id, estado }) => {
+const Card = ({ nome, partido, id, estado, imagem }) => {
   return (
     <div className={styles.card}>
       <div>
-        <img src={deputado.src} className={styles.imagemDeputado}></img>
+        <img src={imagem} className={styles.imagemDeputado}></img>
       </div>
 
       <div>
