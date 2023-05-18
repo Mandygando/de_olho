@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import Menu from './Menu/Index'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Menu from './Menu';
 const Pagina = (props) => {
   return (
    

@@ -1,10 +1,11 @@
 .card {
-    width: 370px;
+    width: 300px;
     height: 500px;
-    background: rgba(103, 103, 103, 0.8);
+    background: rgba(103, 103, 103, 0.5);
     border-radius: 24px;    
     display: flex;
     flex-direction: column;
+    gap: 24px;
     align-items: center;
 }
 
@@ -12,10 +13,45 @@
     font-family: 'Urbanist';
     font-style: normal;
     font-weight: 700;
-    font-size: 45px;
-    line-height: 32px;
+    font-size: 40px;
+    text-align: center;
 }
 
 .imagemDeputado {
+    width: 200px;
     border-radius: 24px;
+    margin-top: 30px;
+
 }
+
+.infoDeputado {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 23px;
+    margin-top: 20px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.botao {
+    width: 80%;
+    background-color: #fff;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(66.27deg, #057447 44.04%, #FDCE38 96.43%);
+    border-radius: 12px;
+    height: 40px;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-family: 'Urbanist';
+    font-weight: 700;
+    font-size: 16px;
+}
+

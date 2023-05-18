@@ -32,7 +32,7 @@ const Menu = () => {
             Quem Somos
         </Link>
 
-    <Form   variant="" className="d-flex">
+    <Form variant="" className="d-flex">
             <Form.Control
               variant="outline-dark"
               type="search"

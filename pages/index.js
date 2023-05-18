@@ -1,9 +1,11 @@
 import Pagina from '@/components/Pagina'
 import React from 'react'
+import styles from '@/styles/Home.module.css'
 import { Button, Col, Row } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from '@/components/Card';
 import Head from 'next/head';
+
 
 const index = () => {
   return (
@@ -25,7 +27,7 @@ const index = () => {
       <Button className='bg-secondary text-white
       ' variant='outline-dark'>Explore</Button>
 
-      <section>
+      <section className={styles.deputados}>
             <Card />
       </section>
     </Pagina>

@@ -1,23 +1,42 @@
-import Image from 'next/image'
-import React from 'react'
-import deputado from './deputado.png'
-import styles from './Card.module.css'
+import React from "react";
+import deputado from "./deputadoFoto.jpg";
+import styles from "./Card.module.css";
+import { MdLocationPin } from "react-icons/md";
+import { MdWorkspaces } from "react-icons/md";
+import { MdOutlineCallMade } from "react-icons/md";
+import Link from "next/link";
 
-const Card = () => {
+const Card = ({ nome, partido, id, estado }) => {
   return (
     <div className={styles.card}>
-        <div>
-        <Image
-            src={deputado}
-            className={styles.imagemDeputado}
-            />
-        </div>
-        <div>
-            <h3 className={styles.titulo}>Afonso Motta</h3>
-        </div>
-        
-    </div>
-  )
-}
+      <div>
+        <img src={deputado.src} className={styles.imagemDeputado}></img>
+      </div>
 
-export default Card
+      <div>
+        <h3 className={styles.titulo}>
+          {nome}
+        </h3>
+        <div className={styles.infoDeputado}>
+          <div className={styles.info}>
+            <MdLocationPin />
+            {estado}
+          </div>
+
+          <div className={styles.info}>
+            <MdWorkspaces />
+            {partido}
+          </div>
+        </div>
+
+      </div>
+
+      <Link href='#' className={styles.botao}>
+        <MdOutlineCallMade />
+          Detalhes
+        </Link>
+    </div>
+  );
+};
+
+export default Card;
