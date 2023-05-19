@@ -33,3 +33,7 @@
     font-size: 18px;
     text-decoration: none;
 }
+
+.link:hover{
+    color: #A4FF00;
+}

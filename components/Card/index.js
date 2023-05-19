@@ -1,5 +1,4 @@
 import React from "react";
-import deputado from "./deputadoFoto.jpg";
 import styles from "./Card.module.css";
 import { MdLocationPin } from "react-icons/md";
 import { MdWorkspaces } from "react-icons/md";

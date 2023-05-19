@@ -20,7 +20,7 @@ const Menu = () => {
     </div>
     <div className={styles.links}>
 
-        <Link href={'/home'} className={styles.link}>
+        <Link href={'/'} className={styles.link}>
             Home
         </Link>
 

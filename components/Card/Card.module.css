@@ -53,5 +53,11 @@
     font-family: 'Urbanist';
     font-weight: 700;
     font-size: 16px;
+    transition: 1s all;
 }
 
+
+.botao:hover{
+    color: #fff;
+    transform: scale(1.1);
+}
