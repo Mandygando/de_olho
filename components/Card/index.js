@@ -30,7 +30,7 @@ const Card = ({ nome, partido, id, estado, imagem }) => {
 
       </div>
 
-      <Link href='#' className={styles.botao}>
+      <Link href={'/deputado/' + id} className={styles.botao}>
         <MdOutlineCallMade />
           Detalhes
         </Link>

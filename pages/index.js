@@ -47,7 +47,7 @@ const Index = ({ deputados }) => {
         <Row className={styles.deputados}>
           {deputados.map((item) => (
             <Col className="mb-4">
-              <Card nome={item.nome} estado={item.siglaUf} partido={item.siglaPartido} imagem={item.urlFoto} />
+              <Card nome={item.nome} estado={item.siglaUf} partido={item.siglaPartido} imagem={item.urlFoto} id={item.id} />
             </Col>
           ))}
         </Row>

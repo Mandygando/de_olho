@@ -1,0 +1,8 @@
+.divFoto{
+    display: flex;
+    justify-content: center;
+}
+
+.fotoDeputado {
+    border-radius: 25px;
+}
