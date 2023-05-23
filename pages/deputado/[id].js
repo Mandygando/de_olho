@@ -14,6 +14,14 @@ const Deputado = ({ deputado }) => {
   const [elementoDespesa, setelementoDespesa] = useState([["Tipo de Despesa", "Valor"],
 ])  
 
+
+const teste = [
+  ["Tipo de Despesa", "Valor"],
+  ["teste", 1],
+  ["teste2", 2],
+
+]
+
   useEffect(() => {
       apiDeputados.get('/deputados/' + id2 + '/despesas?ano=2023&mes=4').then(resultado => {
           setData(resultado.data.dados)
@@ -21,9 +29,11 @@ const Deputado = ({ deputado }) => {
   }, [])
 
   useEffect(() => {
+    const despesas = [["Tipo de Despesa", "Valor"]]
     {data.map((item) => (
-      elementoDespesa.push([item.tipoDespesa, item.valorDocumento])
+      despesas.push([item.tipoDespesa, item.valorDocumento])
     ))}
+    setelementoDespesa(despesas)
 }, [data])
 
 const options = {
@@ -65,7 +75,7 @@ const options = {
       options={options}
       width={"100%"}
       height={"400px"}
-    />
+      />
     </Pagina>
   )
 }
