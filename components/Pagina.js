@@ -2,6 +2,7 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Menu from './Menu';
+import Rodape from './Rodape';
 const Pagina = (props) => {
   return (
      
@@ -10,7 +11,7 @@ const Pagina = (props) => {
           <Container>
              {props.children}
           </Container>
-           
+          <Rodape></Rodape>
         </div>
   )
 }
