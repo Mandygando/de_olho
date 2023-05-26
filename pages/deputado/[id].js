@@ -11,16 +11,8 @@ const Deputado = ({ deputado }) => {
   const router = useRouter();
   const id2 = router.query.id
   const [data, setData] = useState([])  
-  const [elementoDespesa, setelementoDespesa] = useState([["Tipo de Despesa", "Valor"],
-])  
+  const [elementoDespesa, setelementoDespesa] = useState()  
 
-
-const teste = [
-  ["Tipo de Despesa", "Valor"],
-  ["teste", 1],
-  ["teste2", 2],
-
-]
 
   useEffect(() => {
       apiDeputados.get('/deputados/' + id2 + '/despesas?ano=2023&mes=4').then(resultado => {
@@ -29,22 +21,19 @@ const teste = [
   }, [])
 
   useEffect(() => {
-    const despesas = [["Tipo de Despesa", "Valor"]]
+    const despesas = [["Tipo de Despesa", "Valor", { role: 'annotation' }]]
     {data.map((item) => (
-      despesas.push([item.tipoDespesa, item.valorDocumento])
+      despesas.push([item.tipoDespesa, item.valorDocumento, item.mes])
     ))}
     setelementoDespesa(despesas)
 }, [data])
 
+
 const options = {
   title: "Despesas",
   colors: ["#057447"],
-  backgroundColor: '#202632',
-  legendTextStyle: { color: '#FFF' },
-  titleTextStyle: { color: '#FFF' },
-  hAxis: {
-    format: 'scientific'
-}
+  background: '#202632',
+
 };
 
   return (
@@ -57,6 +46,7 @@ const options = {
         </div>
 
         <section>
+
         <Card border="danger" style={{color: '#000000'}}>
             <Card.Header>Dados Pessoais</Card.Header>
             <Card.Body bg='white' >
@@ -70,7 +60,7 @@ const options = {
 
 
       <Chart
-      chartType="ColumnChart"
+      chartType="BarChart"
       data={elementoDespesa}
       options={options}
       width={"100%"}
