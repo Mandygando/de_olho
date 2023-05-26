@@ -34,10 +34,10 @@ const Menu = () => {
 
     <Form variant="" className="d-flex">
             <Form.Control
-              variant="outline-dark"
+              variant="outline-white"
               type="search"
               placeholder="Search"
-              className="me-2 outline-dark bg-dark"
+              className="me-2 text-white outline-dark bg-dark"
               aria-label="Search"
             />
           </Form>
