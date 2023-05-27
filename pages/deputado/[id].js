@@ -1,7 +1,7 @@
 import Pagina from '@/components/Pagina'
 import apiDeputados from '@/services/apiDeputados'
 import React, { useEffect, useState } from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, Col, Row } from 'react-bootstrap'
 import styles from './Deputado.module.css'
 import Chart from 'react-google-charts'
 import { useRouter } from 'next/router'
@@ -46,16 +46,34 @@ const options = {
         </div>
 
         <section>
-
-        <Card border="danger" style={{color: '#000000'}}>
+        <Row>
+          <Col md={6}>
+        <Card border="secondary" style={{color: '#000000'}}>
             <Card.Header>Dados Pessoais</Card.Header>
             <Card.Body bg='white' >
             <p><strong>Nome Civil: </strong> {deputado.nomeCivil}</p>
             <p><strong>E-mail: </strong> {deputado.ultimoStatus.email}</p>
             <p><strong>Telefone: </strong> {deputado.ultimoStatus.gabinete.telefone}</p>
+            <p><strong>Data de Nascimento: </strong> {deputado.dataNascimento}</p>
+            <p><strong>UF de Nascimento: </strong> {deputado.ufNascimento}</p>
+            <p><strong>Escolaridade: </strong> {deputado.escolaridade}</p>
             </Card.Body>
             </Card>
+            </Col>
 
+            <Col md={6}>
+             <Card border="secondary" style={{color: '#000000'}}>
+            <Card.Header>Dados Eleitorais</Card.Header>
+            <Card.Body bg='white' >
+            <p><strong>Nome Eleitoral: </strong> {deputado.ultimoStatus.nomeEleitoral}</p>
+            <p><strong>Partido: </strong> {deputado.ultimoStatus.siglaPartido}</p>
+            <p><strong>UF: </strong> {deputado.ultimoStatus.siglaUf}</p>
+            <p><strong>Situação: </strong> {deputado.ultimoStatus.situacao}</p>
+            <p><strong>Condição Eleitoral: </strong> {deputado.ultimoStatus.condicaoEleitoral}</p>
+            </Card.Body>
+            </Card>
+            </Col>
+            </Row>
         </section>
 
 
