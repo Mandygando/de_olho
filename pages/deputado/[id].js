@@ -46,9 +46,9 @@ const options = {
         </div>
 
         <section>
-        <Row>
+        <Row className="Card.card">
           <Col md={6}>
-        <Card border="secondary" style={{color: '#000000'}}>
+        <Card border="success" style={{color: '#000000'}}>
             <Card.Header>Dados Pessoais</Card.Header>
             <Card.Body bg='white' >
             <p><strong>Nome Civil: </strong> {deputado.nomeCivil}</p>
@@ -62,11 +62,12 @@ const options = {
             </Col>
 
             <Col md={6}>
-             <Card border="secondary" style={{color: '#000000'}}>
+             <Card border="success" style={{color: '#000000'}}>
             <Card.Header>Dados Eleitorais</Card.Header>
             <Card.Body bg='white' >
             <p><strong>Nome Eleitoral: </strong> {deputado.ultimoStatus.nomeEleitoral}</p>
             <p><strong>Partido: </strong> {deputado.ultimoStatus.siglaPartido}</p>
+            <p><strong>ID: </strong> {deputado.ultimoStatus.idLegislatura}</p>
             <p><strong>UF: </strong> {deputado.ultimoStatus.siglaUf}</p>
             <p><strong>Situação: </strong> {deputado.ultimoStatus.situacao}</p>
             <p><strong>Condição Eleitoral: </strong> {deputado.ultimoStatus.condicaoEleitoral}</p>
