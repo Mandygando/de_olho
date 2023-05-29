@@ -23,7 +23,7 @@ const Deputado = ({ deputado }) => {
   useEffect(() => {
     const despesas = [["Tipo de Despesa", "Valor", { role: 'annotation' }]]
     {data.map((item) => (
-      despesas.push([item.tipoDespesa, item.valorDocumento, item.mes])
+      despesas.push([item.tipoDespesa, item.valorDocumento, new Date(item.dataDocumento).toLocaleDateString()])
     ))}
     setelementoDespesa(despesas)
 }, [data])
@@ -33,6 +33,14 @@ const options = {
   title: "Despesas",
   colors: ["#057447"],
   background: '#202632',
+  vAxis: {
+    textPosition: 'none'
+  },
+  bar: { groupWidth: "90%" },
+  height: 1000,
+  chartArea:{
+    backgroundColor: '#fcfcfc'
+}
 
 };
 

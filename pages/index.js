@@ -1,5 +1,5 @@
 import Pagina from '@/components/Pagina';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '@/styles/Home.module.css';
 import { Button, Col, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,6 +8,17 @@ import Head from 'next/head';
 import apiDeputados from '@/services/apiDeputados';
 
 const Index = ({ deputados }) => {
+
+  const [estadoDeputados, setestadoDeputados] = useState(deputados)
+
+  function filtraDeputados() {
+    const deputadosFiltrados = estadoDeputados.filter((deputado) => {
+      return deputado.siglaPartido === 'PT';
+    })
+
+    setestadoDeputados(deputadosFiltrados)
+  }
+
   return (
     <>
       <Head>
@@ -43,9 +54,17 @@ const Index = ({ deputados }) => {
           </Col>
         </Row>
 
+        <Row>
+        <Col md={3}>
+            <Button className={styles.botao} onClick={() => filtraDeputados()}>
+              Partidos
+            </Button>
+            </Col>
+        </Row>
+
         <br />
         <Row className={styles.deputados}>
-          {deputados.map((item) => (
+          {estadoDeputados.map((item) => (
             <Col className="mb-4">
               <Card nome={item.nome} estado={item.siglaUf} partido={item.siglaPartido} imagem={item.urlFoto} id={item.id} />
             </Col>
@@ -66,3 +85,4 @@ export async function getServerSideProps(context) {
     props: { deputados },
   };
 }
+
