@@ -45,7 +45,7 @@ const options = {
 };
 
   return (
-    <Pagina>
+    <Pagina >
         <div className={styles.divFoto}>
             <img
                 src={deputado.ultimoStatus.urlFoto}
@@ -85,14 +85,17 @@ const options = {
             </Row>
         </section>
 
-
-      <Chart
+      
+         <Chart
       chartType="BarChart"
       data={elementoDespesa}
       options={options}
       width={"100%"}
       height={"400px"}
       />
+      <div style={{height:'600px'}}>
+      </div>
+     
     </Pagina>
   )
 }
