@@ -28,19 +28,19 @@ const Deputado = ({ deputado }) => {
     setelementoDespesa(despesas)
 }, [data])
 
-
 const options = {
   title: "Despesas",
   colors: ["#057447"],
-  background: '#202632',
+  backgroundColor: '#202632',
+  chartArea: {
+    backgroundColor: '#202632'
+  },
   vAxis: {
     textPosition: 'none'
   },
   bar: { groupWidth: "90%" },
   height: 1000,
-  chartArea:{
-    backgroundColor: '#fcfcfc'
-}
+
 
 };
 
@@ -53,11 +53,11 @@ const options = {
             />
         </div>
 
-        <section>
-        <Row className="Card.card">
+        <section className={styles.info}>
+        <Row>
           <Col md={6}>
-        <Card border="success" style={{color: '#000000'}}>
-            <Card.Header>Dados Pessoais</Card.Header>
+        <Card border="success" className={styles.infoPessoal}>
+            <Card.Header className={styles.titulo}>Dados Pessoais</Card.Header>
             <Card.Body bg='white' >
             <p><strong>Nome Civil: </strong> {deputado.nomeCivil}</p>
             <p><strong>E-mail: </strong> {deputado.ultimoStatus.email}</p>
@@ -66,12 +66,12 @@ const options = {
             <p><strong>UF de Nascimento: </strong> {deputado.ufNascimento}</p>
             <p><strong>Escolaridade: </strong> {deputado.escolaridade}</p>
             </Card.Body>
-            </Card>
+        </Card>
             </Col>
 
             <Col md={6}>
-             <Card border="success" style={{color: '#000000'}}>
-            <Card.Header>Dados Eleitorais</Card.Header>
+             <Card border="success" className={styles.infoPessoal}>
+            <Card.Header className={styles.titulo}>Dados Eleitorais</Card.Header>
             <Card.Body bg='white' >
             <p><strong>Nome Eleitoral: </strong> {deputado.ultimoStatus.nomeEleitoral}</p>
             <p><strong>Partido: </strong> {deputado.ultimoStatus.siglaPartido}</p>
@@ -85,14 +85,15 @@ const options = {
             </Row>
         </section>
 
-
-      <Chart
+       <Chart
       chartType="BarChart"
       data={elementoDespesa}
       options={options}
       width={"100%"}
       height={"400px"}
       />
+ 
+     
     </Pagina>
   )
 }

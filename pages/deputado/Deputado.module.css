@@ -3,6 +3,23 @@
     justify-content: center;
 }
 
+.info {
+    margin-bottom: 50px;
+}
+
 .fotoDeputado {
     border-radius: 25px;
+    width: 300px;
+    margin-bottom: 100px;
+}
+
+.infoPessoal {
+    background: rgba(103, 103, 103, 0.4);
+    font-family: 'Urbanist';
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.titulo {
+    background: rgba(103, 103, 103, 0.6);
 }
