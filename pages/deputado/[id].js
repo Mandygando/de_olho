@@ -38,6 +38,12 @@ const options = {
   vAxis: {
     textPosition: 'none'
   },
+  role: {
+    style: {
+color: '#FFFFFF'
+    }
+    
+  },
   bar: { groupWidth: "90%" },
   height: 1000,
 
@@ -93,10 +99,8 @@ const options = {
       height={"400px"}
       />
 
-      <div style={{height:'600px'}}>
-      </div>
-
-     
+      <div style={{height:'600px'}}></div>
+    
     </Pagina>
   )
 }
