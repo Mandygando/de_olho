@@ -28,6 +28,7 @@ const Deputado = ({ deputado }) => {
     setelementoDespesa(despesas)
 }, [data])
 
+
 const options = {
   title: "Despesas",
   colors: ["#057447"],
@@ -38,24 +39,16 @@ const options = {
   vAxis: {
     textPosition: 'none'
   },
+  hAxis: {textStyle: { color: '#fff'}},
   annotations: {
     textStyle: {
-      fontName: 'Times-Roman',
       fontSize: 18,
-      bold: true,
-      italic: true,
-      // The color of the text.
       color: '#fff',
-      // The color of the text outline.
       auraColor: '#ffff',
-      // The transparency of the text.
     },
-    
   },
   bar: { groupWidth: "90%" },
   height: 1000,
-
-
 };
 
   return (
@@ -76,7 +69,7 @@ const options = {
             <p><strong>Nome Civil: </strong> {deputado.nomeCivil}</p>
             <p><strong>E-mail: </strong> {deputado.ultimoStatus.email}</p>
             <p><strong>Telefone: </strong> {deputado.ultimoStatus.gabinete.telefone}</p>
-            <p><strong>Data de Nascimento: </strong> {deputado.dataNascimento}</p>
+            <p><strong>Data de Nascimento: </strong> {new Date(deputado.dataNascimento).toLocaleDateString()}</p>
             <p><strong>UF de Nascimento: </strong> {deputado.ufNascimento}</p>
             <p><strong>Escolaridade: </strong> {deputado.escolaridade}</p>
             </Card.Body>
@@ -85,15 +78,15 @@ const options = {
 
             <Col md={6}>
              <Card border="success" className={styles.infoPessoal}>
-            <Card.Header className={styles.titulo}>Dados Eleitorais</Card.Header>
-            <Card.Body bg='white' >
-            <p><strong>Nome Eleitoral: </strong> {deputado.ultimoStatus.nomeEleitoral}</p>
-            <p><strong>Partido: </strong> {deputado.ultimoStatus.siglaPartido}</p>
-            <p><strong>ID: </strong> {deputado.ultimoStatus.idLegislatura}</p>
-            <p><strong>UF: </strong> {deputado.ultimoStatus.siglaUf}</p>
-            <p><strong>Situação: </strong> {deputado.ultimoStatus.situacao}</p>
-            <p><strong>Condição Eleitoral: </strong> {deputado.ultimoStatus.condicaoEleitoral}</p>
-            </Card.Body>
+              <Card.Header className={styles.titulo}>Dados Eleitorais</Card.Header>
+              <Card.Body bg='white' >
+              <p><strong>Nome Eleitoral: </strong> {deputado.ultimoStatus.nomeEleitoral}</p>
+              <p><strong>Partido: </strong> {deputado.ultimoStatus.siglaPartido}</p>
+              <p><strong>ID: </strong> {deputado.ultimoStatus.idLegislatura}</p>
+              <p><strong>UF: </strong> {deputado.ultimoStatus.siglaUf}</p>
+              <p><strong>Situação: </strong> {deputado.ultimoStatus.situacao}</p>
+              <p><strong>Condição Eleitoral: </strong> {deputado.ultimoStatus.condicaoEleitoral}</p>
+              </Card.Body>
             </Card>
             </Col>
             </Row>

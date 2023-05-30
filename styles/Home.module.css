@@ -5,10 +5,10 @@
 }
 
 .botao {
-  background: linear-gradient(207.67deg, #105A06 3.43%, #9BE319 104.7%);
-  height: 56px;
-  width: 126px;
-  border: none;
+  background: linear-gradient(207.67deg, #105A06 3.43%, #9BE319 104.7%) !important;
+  height: 56px !important;
+  width: 126px !important;
+  border: none !important;
   font-family: 'Urbanist';
   font-size: 16px;
   font-weight: 700;

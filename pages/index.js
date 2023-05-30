@@ -1,29 +1,47 @@
-import Pagina from '@/components/Pagina';
-import React, { useState } from 'react';
-import styles from '@/styles/Home.module.css';
-import { Button, Col, Row } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Card from '@/components/Card';
-import Head from 'next/head';
-import apiDeputados from '@/services/apiDeputados';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Pagina from "@/components/Pagina";
+import React, { useEffect, useState } from "react";
+import { Button, Col, Dropdown, DropdownButton, NavDropdown, Row } from "react-bootstrap";
+import Card from "@/components/Card";
+import Head from "next/head";
+import apiDeputados from "@/services/apiDeputados";
+import styles from "@/styles/Home.module.css";
 
-const Index = ({ deputados }) => {
+const Index = () => {
 
-  const [estadoDeputados, setestadoDeputados] = useState(deputados)
+  const [partidos, setPartidos] = useState([]);
+  const [deputados, setDeputados] = useState([]);
 
-  function filtraDeputados() {
-    const deputadosFiltrados = estadoDeputados.filter((deputado) => {
-      return deputado.siglaPartido === 'PT';
-    })
+  useEffect(()=>{
+      apiDeputados.get('/deputados').then(resultado=>{
+          setDeputados(resultado.data.dados)
+      })     
+  }, [])
 
-    setestadoDeputados(deputadosFiltrados)
+  useEffect(() => {
+    apiDeputados.get("/partidos?itens=30").then((resultado) => {
+      setPartidos(resultado.data.dados);
+    });
+  }, []);
+
+
+  function filtraDeputados(e) {
+    const deputadosFiltrados = deputados.filter((deputado) => {
+      return deputado.siglaPartido === e;
+    });
+
+    setDeputados(deputadosFiltrados);
   }
 
   return (
     <>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
           rel="stylesheet"
@@ -55,18 +73,31 @@ const Index = ({ deputados }) => {
         </Row>
 
         <Row>
-        <Col md={3}>
-            <Button className={styles.botao} onClick={() => filtraDeputados()}>
-              Partidos
-            </Button>
-            </Col>
+          <Col md={3}>
+            <DropdownButton
+                className={styles.botao}
+                title="Partidos"
+                onSelect={filtraDeputados}
+            >
+              {partidos.map(item => (
+              <Dropdown.Item eventKey={item.sigla} key={item.id}>{item.nome}</Dropdown.Item>
+            ))}
+
+              </DropdownButton>
+          </Col>
         </Row>
 
         <br />
         <Row className={styles.deputados}>
-          {estadoDeputados.map((item) => (
+          {deputados.map((item) => (
             <Col className="mb-4">
-              <Card nome={item.nome} estado={item.siglaUf} partido={item.siglaPartido} imagem={item.urlFoto} id={item.id} />
+              <Card
+                nome={item.nome}
+                estado={item.siglaUf}
+                partido={item.siglaPartido}
+                imagem={item.urlFoto}
+                id={item.id}
+              />
             </Col>
           ))}
         </Row>
@@ -76,13 +107,4 @@ const Index = ({ deputados }) => {
 };
 
 export default Index;
-
-export async function getServerSideProps(context) {
-  const response = await apiDeputados.get('/deputados');
-  const deputados = response.data.dados;
-
-  return {
-    props: { deputados },
-  };
-}
 
