@@ -38,10 +38,18 @@ const options = {
   vAxis: {
     textPosition: 'none'
   },
-  role: {
-    style: {
-color: '#FFFFFF'
-    }
+  annotations: {
+    textStyle: {
+      fontName: 'Times-Roman',
+      fontSize: 18,
+      bold: true,
+      italic: true,
+      // The color of the text.
+      color: '#fff',
+      // The color of the text outline.
+      auraColor: '#ffff',
+      // The transparency of the text.
+    },
     
   },
   bar: { groupWidth: "90%" },
