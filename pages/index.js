@@ -6,16 +6,34 @@ import Card from "@/components/Card";
 import Head from "next/head";
 import apiDeputados from "@/services/apiDeputados";
 import styles from "@/styles/Home.module.css";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Index = () => {
 
   const [partidos, setPartidos] = useState([]);
   const [deputados, setDeputados] = useState([]);
+  
+  // infinity scrolll
 
-  useEffect(()=>{
-      apiDeputados.get('/deputados').then(resultado=>{
-          setDeputados(resultado.data.dados)
-      })     
+  const [Deputados, setdeputados] = useState([]);
+  let[page, setPage] = useState(1)
+
+  useEffect(() => {
+    carregarDeputados()
+  }, [])
+
+  function carregarDeputados(){
+    setPage(page + 1)
+    apiDeputados.get('/deputados?itens=30&pagina=' + page).then(resultado =>{
+      setdeputados(Deputados.concat(resultado.data.dados))
+    })
+  }
+  // infinity scrolll
+
+  useEffect(() => {
+    apiDeputados.get('/deputados').then(resultado => {
+      setDeputados(resultado.data.dados)
+    })
   }, [])
 
   useEffect(() => {
@@ -75,21 +93,28 @@ const Index = () => {
         <Row>
           <Col md={3}>
             <DropdownButton
-                className={styles.botao}
-                title="Partidos"
-                onSelect={filtraDeputados}
+              variant=""
+              className={styles.botao}
+              title="Partidos"
+              onSelect={filtraDeputados}
             >
               {partidos.map(item => (
-              <Dropdown.Item eventKey={item.sigla} key={item.id}>{item.nome}</Dropdown.Item>
-            ))}
+                <Dropdown.Item eventKey={item.sigla} key={item.id}>{item.nome}</Dropdown.Item>
+              ))}
 
-              </DropdownButton>
+            </DropdownButton>
           </Col>
         </Row>
 
-        <br />
-        <Row className={styles.deputados}>
-          {deputados.map((item) => (
+        <br /> 
+          <InfiniteScroll 
+          dataLength={Deputados.length}
+          hasMore={true}
+          next={carregarDeputados}
+          style={{ display: 'flex', overflow: '' }}
+          >
+            <Row  className={styles.deputados}>
+          {Deputados.map((item) => (
             <Col className="mb-4">
               <Card
                 nome={item.nome}
@@ -101,6 +126,9 @@ const Index = () => {
             </Col>
           ))}
         </Row>
+          </InfiniteScroll>
+        
+
       </Pagina>
     </>
   );
