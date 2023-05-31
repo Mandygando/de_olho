@@ -47,6 +47,15 @@ const Index = ( {listaCompletaDeputados} ) => {
     setdeputados(deputadosFiltrados);
   }
 
+  function filtraDeputadosUF(e) {
+    const deputadosFiltrados = listaCompletaDeputados.filter((deputado) => {
+      return deputado.siglaUf === e;
+    });
+
+    setdeputados(deputadosFiltrados);
+  }
+
+
   return (
     <>
       <Head>
@@ -78,16 +87,10 @@ const Index = ( {listaCompletaDeputados} ) => {
         </Row>
 
         <br />
-        <Row>
-          <Col md={3}>
-            <Button className="bg-secondary text-white" variant="outline-dark">
-              Explore
-            </Button>
-          </Col>
-        </Row>
+        
 
         <Row>
-          <Col md={3}>
+          <Col md={2}>
             <DropdownButton
               variant=""
               className={styles.botao}
@@ -98,6 +101,44 @@ const Index = ( {listaCompletaDeputados} ) => {
                 <Dropdown.Item eventKey={item.sigla} key={item.id}>{item.nome}</Dropdown.Item>
               ))}
 
+            </DropdownButton>
+          </Col>
+          <Col md={1}>
+            <DropdownButton
+              variant=""
+              className={styles.botao}
+              title="UF"
+              onSelect={filtraDeputadosUF}
+            >
+             
+                <Dropdown.Item eventKey="AC" key="AC">AC</Dropdown.Item>
+                <Dropdown.Item eventKey="AL" key="AL">AL</Dropdown.Item>
+                <Dropdown.Item eventKey="AP" key="AP">AP</Dropdown.Item>
+                <Dropdown.Item eventKey="AM" key="AM">AM</Dropdown.Item>
+                <Dropdown.Item eventKey="BA" key="BA">BA</Dropdown.Item>
+                <Dropdown.Item eventKey="CE" key="CE">CE</Dropdown.Item>
+                <Dropdown.Item eventKey="DF" key="DF">DF</Dropdown.Item>
+                <Dropdown.Item eventKey="ES" key="ES">ES</Dropdown.Item>
+                <Dropdown.Item eventKey="GO" key="GO">GO</Dropdown.Item>
+                <Dropdown.Item eventKey="MA" key="MA">MA</Dropdown.Item>
+                <Dropdown.Item eventKey="MT" key="MT">MT</Dropdown.Item>
+                <Dropdown.Item eventKey="MS" key="MS">MS</Dropdown.Item>
+                <Dropdown.Item eventKey="MG" key="MG">MG</Dropdown.Item>
+                <Dropdown.Item eventKey="PA" key="PA">PA</Dropdown.Item>
+                <Dropdown.Item eventKey="PB" key="PB">PB</Dropdown.Item>
+                <Dropdown.Item eventKey="PR" key="PR">PR</Dropdown.Item>
+                <Dropdown.Item eventKey="PE" key="PE">PE</Dropdown.Item>
+                <Dropdown.Item eventKey="PI" key="PI">PI</Dropdown.Item>
+                <Dropdown.Item eventKey="RJ" key="RJ">RJ</Dropdown.Item>
+                <Dropdown.Item eventKey="RN" key="RN">RN</Dropdown.Item>
+                <Dropdown.Item eventKey="RS" key="RS">RS</Dropdown.Item>
+                <Dropdown.Item eventKey="RO" key="RO">RO</Dropdown.Item>
+                <Dropdown.Item eventKey="RR" key="RR">RR</Dropdown.Item>
+                <Dropdown.Item eventKey="SC" key="SC">SC</Dropdown.Item>
+                <Dropdown.Item eventKey="SP" key="SP">SP</Dropdown.Item>
+                <Dropdown.Item eventKey="SE" key="SE">SE</Dropdown.Item>
+                <Dropdown.Item eventKey="TO" key="TO">TO</Dropdown.Item>
+          
             </DropdownButton>
           </Col>
         </Row>
