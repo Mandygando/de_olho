@@ -1,22 +1,23 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Pagina from "@/components/Pagina";
 import React, { useEffect, useState } from "react";
-import { Button, Col, Dropdown, DropdownButton, NavDropdown, Row } from "react-bootstrap";
+import { Button, Col, Dropdown, DropdownButton, Row } from "react-bootstrap";
 import Card from "@/components/Card";
 import Head from "next/head";
 import apiDeputados from "@/services/apiDeputados";
 import styles from "@/styles/Home.module.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const Index = () => {
+const Index = ( {listaCompletaDeputados} ) => {
 
   const [partidos, setPartidos] = useState([]);
-  const [deputados, setDeputados] = useState([]);
+  const [deputados, setDeputados] = useState();
   
   // infinity scrolll
 
   const [Deputados, setdeputados] = useState([]);
-  let[page, setPage] = useState(1)
+
+  let [page, setPage] = useState(1)
 
   useEffect(() => {
     carregarDeputados()
@@ -24,17 +25,12 @@ const Index = () => {
 
   function carregarDeputados(){
     setPage(page + 1)
-    apiDeputados.get('/deputados?itens=30&pagina=' + page).then(resultado =>{
+    apiDeputados.get('/deputados?itens=20&pagina=' + page).then(resultado =>{
       setdeputados(Deputados.concat(resultado.data.dados))
     })
   }
-  // infinity scrolll
 
-  useEffect(() => {
-    apiDeputados.get('/deputados').then(resultado => {
-      setDeputados(resultado.data.dados)
-    })
-  }, [])
+  // infinity scrolll
 
   useEffect(() => {
     apiDeputados.get("/partidos?itens=30").then((resultado) => {
@@ -44,11 +40,11 @@ const Index = () => {
 
 
   function filtraDeputados(e) {
-    const deputadosFiltrados = deputados.filter((deputado) => {
+    const deputadosFiltrados = listaCompletaDeputados.filter((deputado) => {
       return deputado.siglaPartido === e;
     });
 
-    setDeputados(deputadosFiltrados);
+    setdeputados(deputadosFiltrados);
   }
 
   return (
@@ -136,3 +132,11 @@ const Index = () => {
 
 export default Index;
 
+export async function getServerSideProps(context) {
+  const response = await apiDeputados.get('/deputados');
+  const listaCompletaDeputados = response.data.dados;
+
+  return {
+    props: { listaCompletaDeputados },
+  };
+}
