@@ -56,7 +56,7 @@ export const options = {
   region: 'BR',
   resolution: 'provinces',
   colorAxis: { colors: ["#00853f", "black", "#e31b23"] },
-  backgroundColor: "#81d4fa",
-  datalessRegionColor: "#7fffd4",
+  backgroundColor: "transparent",
+  datalessRegionColor: "transparent",
 
 };
