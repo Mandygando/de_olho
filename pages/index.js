@@ -111,7 +111,7 @@ const Index = () => {
           dataLength={Deputados.length}
           hasMore={true}
           next={carregarDeputados}
-          style={{ display: 'flex', overflow: '' }}
+          style={{ display: 'flex', overflow: '100%' }}
           >
             <Row  className={styles.deputados}>
           {Deputados.map((item) => (
