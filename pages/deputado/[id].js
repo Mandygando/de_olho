@@ -12,6 +12,7 @@ const Deputado = ({ deputado }) => {
   const id2 = router.query.id
   const [data, setData] = useState([])  
   const [elementoDespesa, setelementoDespesa] = useState()  
+  const [contagemElemento, setContagemElemento] = useState(['Tipo de Despesa', 'Quantidade'])
 
 
   useEffect(() => {
@@ -26,11 +27,32 @@ const Deputado = ({ deputado }) => {
       despesas.push([item.tipoDespesa, item.valorDocumento, new Date(item.dataDocumento).toLocaleDateString()])
     ))}
     setelementoDespesa(despesas)
+    
 }, [data])
 
 
+useEffect(() => {
+  let contagem = [];
+  const contagemDeElementos = [['Tipo de Despesa', 'Valor']]
+
+  // Itere sobre o array
+  for (let i = 0; i < data.length; i++) {
+    let valorAtributo = data[i]['tipoDespesa'];
+
+    if (contagem[valorAtributo]) {
+      contagem[valorAtributo]++;
+    } else {
+      contagem[valorAtributo] = 1;
+    }
+  }
+  console.log(contagem)
+  contagemDeElementos.push(contagem)
+  setContagemElemento(contagemDeElementos)
+  console.log(contagemDeElementos)
+}, [data])
+
 const options = {
-  title: "Despesas",
+  
   colors: ["#057447"],
   backgroundColor: '#202632',
   chartArea: {
@@ -50,6 +72,7 @@ const options = {
   bar: { groupWidth: "90%" },
   height: 1000,
 };
+
 
   return (
     <Pagina >
@@ -92,12 +115,22 @@ const options = {
             </Row>
         </section>
 
+        <h2 className={styles.subtitulo}>Gastos do deputado no último mês.</h2>
+
        <Chart
       chartType="BarChart"
       data={elementoDespesa}
       options={options}
       width={"100%"}
       height={"400px"}
+      />
+
+      <Chart
+        chartType="PieChart"
+        width="100%"
+        height="400px"
+        data={contagemElemento}
+        options={options}
       />
 
       <div style={{height:'600px'}}></div>

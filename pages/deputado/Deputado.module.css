@@ -23,3 +23,9 @@
 .titulo {
     background: rgba(103, 103, 103, 0.6);
 }
+
+.subtitulo {
+    text-align: center;
+    padding-top: 70px;
+    padding-bottom: 10px;
+}
