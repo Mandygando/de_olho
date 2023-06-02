@@ -1,6 +1,6 @@
-
 import { Carousel } from 'react-bootstrap';
 import Pagina from '@/components/Pagina';
+import styles from './Quemsomos.module.css';
 
 const QuemSomos = () => {
   return (
@@ -8,39 +8,61 @@ const QuemSomos = () => {
       <Pagina />
       <Carousel>
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="amigos-felizes-e-sorriso-de-retrato-para-selfie-no-escritorio-para-exercicios-de-reuniao-ou-construcao-de-equipe-juntos-no-trabalho-grupo-diversificado-de-pessoas-criativas-em-felicidade-sorrindo-par.avif"
-            alt="Missão "
-          />
-          <Carousel.Caption>
-            <h3>Missão</h3>
-            <p>Nosso site tem como missão capacitar os cidadãos a acompanhar de perto a atuação dos deputados. Oferecemos informações atualizadas sobre atividades parlamentares, projetos de lei e votações, proporcionando transparência e engajamento cívico. Nosso objetivo é facilitar o acesso a dados e permitir que os cidadãos tomem decisões informadas e influenciem o processo democrático.</p>
-          </Carousel.Caption>
+          <div className={styles.carouselItem}>
+            <div className={styles.carouselImageWrapper}>
+              <img
+                className={styles.carouselImage}
+                src="/images/missao.jpg"
+                alt="Missão"
+              />
+            </div>
+            <Carousel.Caption className={styles.carouselCaption}>
+              <h3>Missão</h3>
+              <p className={styles.customParagraph}>
+                Nosso site tem como missão capacitar os cidadãos a acompanhar de perto a atuação dos deputados.
+                Oferecemos informações atualizadas sobre atividades parlamentares, projetos de lei e votações,
+                proporcionando transparência e engajamento cívico. Nosso objetivo é facilitar o acesso a dados e permitir
+                que os cidadãos tomem decisões informadas e influenciem o processo democrático.
+              </p>
+            </Carousel.Caption>
+          </div>
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="holder.js/800x400?text=Second slide&bg=282c34"
-            alt="Visão"
-          />
-          <Carousel.Caption>
-            <h3>Visão</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
+          <div className={styles.carouselItem}>
+            <div className={styles.carouselImageWrapper}>
+              <img
+                className={styles.carouselImage}
+                src="/images/visao.jpg"
+                alt="Visão"
+              />
+            </div>
+            <Carousel.Caption className={styles.carouselCaption}>
+              <h3>Visão</h3>
+              <p className={styles.customParagraph}>
+                Ser a principal plataforma online para acompanhar a atuação dos deputados, proporcionando aos cidadãos ferramentas e informações necessárias para tomar decisões informadas e influenciar positivamente o processo democrático. Queremos ser reconhecidos como um agente de mudança que fortalece a participação cívica e promove a transparência na política.
+              </p>
+            </Carousel.Caption>
+          </div>
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="holder.js/800x400?text=Third slide&bg=20232a"
-            alt="Valores"
-          />
-          <Carousel.Caption>
-            <h3>Valores</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
+          <div className={styles.carouselItem}>
+            <div className={styles.carouselImageWrapper}>
+              <img
+                className={styles.carouselImage}
+                src="/images/valores.jpg"
+                alt="Valores"
+              />
+            </div>
+            <Carousel.Caption className={styles.carouselCaption}>
+              <h3>Valores</h3>
+              <p className={styles.customParagraph}>
+                Transparência: Priorizamos a transparência em todas as nossas ações e operações.
+                Engajamento Cívico: Estimulamos o engajamento cívico, encorajando os cidadãos a se envolverem ativamente no processo democrático.
+                Empoderamento: Capacitamos os cidadãos, fornecendo informações atualizadas e acesso fácil a dados relevantes.
+                Imparcialidade: Mantemos uma postura imparcial e objetiva em todas as nossas atividades.
+              </p>
+            </Carousel.Caption>
+          </div>
         </Carousel.Item>
       </Carousel>
     </div>

@@ -1,0 +1,28 @@
+.carouselItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carouselImage {
+  max-width: 100%;
+  max-height: 100%;
+  width: 500px;
+  height: auto;
+}
+
+.carouselCaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  width: 35%;
+  margin: 0 auto;
+}
