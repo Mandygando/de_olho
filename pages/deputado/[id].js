@@ -73,6 +73,22 @@ const options = {
   height: 1000,
 };
 
+var siglaUf = deputado.ultimoStatus.siglaUf;
+var stringCompleta = 'BR-' + siglaUf;
+
+const estados = [
+  ['State'],
+  [stringCompleta]
+];
+
+const options_estados = {
+  region: 'BR',
+  resolution: 'provinces',
+  colorAxis: { colors: ["#00853f", "black", "#e31b23"] },
+  backgroundColor: "transparent",
+  datalessRegionColor: "transparent",
+
+};
 
   return (
     <Pagina >
@@ -81,7 +97,17 @@ const options = {
                 src={deputado.ultimoStatus.urlFoto}
                 className={styles.fotoDeputado}
             />
+            <div className={styles.mapa}>
+                 <Chart
+                chartType="GeoChart"
+                height="300px"
+                data={estados}
+                options={options_estados}
+              />
+              </div>
         </div>
+
+
 
         <section className={styles.info}>
         <Row>
@@ -109,6 +135,8 @@ const options = {
               <p><strong>UF: </strong> {deputado.ultimoStatus.siglaUf}</p>
               <p><strong>Situação: </strong> {deputado.ultimoStatus.situacao}</p>
               <p><strong>Condição Eleitoral: </strong> {deputado.ultimoStatus.condicaoEleitoral}</p>
+      
+             
               </Card.Body>
             </Card>
             </Col>

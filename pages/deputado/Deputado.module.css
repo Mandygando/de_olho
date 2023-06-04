@@ -1,6 +1,7 @@
 .divFoto{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .info {
@@ -28,4 +29,9 @@
     text-align: center;
     padding-top: 70px;
     padding-bottom: 10px;
+}
+
+.mapa {
+    display: flex;
+    justify-content: center;
 }

@@ -6,18 +6,13 @@ const ranking = () => {
   
   return (
     <Pagina>
-        <Chart
-      chartType="GeoChart"
-      width="100%"
-      height="400px"
-      data={data}
-      options={options}
-    />
+     
     </Pagina>
   )
 }
 
 export default ranking
+
 export const data = [
   ['State', 'City'],
   ['BR-MG', 'Minas Gerais'],
