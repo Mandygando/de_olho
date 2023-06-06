@@ -12,7 +12,7 @@ const Deputado = ({ deputado }) => {
   const id2 = router.query.id
   const [data, setData] = useState([])  
   const [elementoDespesa, setelementoDespesa] = useState()  
-  const [contagemElemento, setContagemElemento] = useState(['Tipo de Despesa', 'Quantidade'])
+  const [contagemElemento, setContagemElemento] = useState()
 
 
   useEffect(() => {
@@ -27,13 +27,14 @@ const Deputado = ({ deputado }) => {
       despesas.push([item.tipoDespesa, item.valorDocumento, new Date(item.dataDocumento).toLocaleDateString()])
     ))}
     setelementoDespesa(despesas)
+    console.log(despesas)
     
 }, [data])
 
 
 useEffect(() => {
   let contagem = [];
-  const contagemDeElementos = [['Tipo de Despesa', 'Valor']]
+
 
   // Itere sobre o array
   for (let i = 0; i < data.length; i++) {
@@ -45,10 +46,14 @@ useEffect(() => {
       contagem[valorAtributo] = 1;
     }
   }
-  console.log(contagem)
-  contagemDeElementos.push(contagem)
-  setContagemElemento(contagemDeElementos)
-  console.log(contagemDeElementos)
+
+  const davi = []
+  for(let i in contagem){
+    davi.push([i, contagem[i]])
+  }
+  console.log(davi);
+  setContagemElemento(davi)
+ 
 }, [data])
 
 const options = {
@@ -90,6 +95,15 @@ const options_estados = {
 
 };
 
+const options2 = {
+  title: "My Daily Activities",
+  pieHole: 0.4,
+  is3D: false,
+  backgroundColor: "transparent",
+  colors: ["#ffd60a", "#1b4965", "#003566", '#023e8a']
+};
+
+
   return (
     <Pagina >
         <div className={styles.divFoto}>
@@ -97,17 +111,7 @@ const options_estados = {
                 src={deputado.ultimoStatus.urlFoto}
                 className={styles.fotoDeputado}
             />
-            <div className={styles.mapa}>
-                 <Chart
-                chartType="GeoChart"
-                height="300px"
-                data={estados}
-                options={options_estados}
-              />
-              </div>
         </div>
-
-
 
         <section className={styles.info}>
         <Row>
@@ -143,22 +147,33 @@ const options_estados = {
             </Row>
         </section>
 
+        <div className={styles.mapa}>
+                 <Chart
+                chartType="GeoChart"
+                height="300px"
+                data={estados}
+                options={options_estados}
+              />
+            </div>
+
         <h2 className={styles.subtitulo}>Gastos do deputado no último mês.</h2>
 
-       <Chart
+      <div className={styles.graficoBarras}>
+      <Chart
       chartType="BarChart"
       data={elementoDespesa}
       options={options}
       width={"100%"}
       height={"400px"}
       />
+      </div> 
 
       <Chart
         chartType="PieChart"
         width="100%"
         height="400px"
-        data={contagemElemento}
-        options={options}
+        data={elementoDespesa}
+        options={options2}
       />
 
       <div style={{height:'600px'}}></div>

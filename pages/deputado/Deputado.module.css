@@ -35,3 +35,7 @@
     display: flex;
     justify-content: center;
 }
+
+.graficoBarras {
+    margin-bottom: 600px;
+}
