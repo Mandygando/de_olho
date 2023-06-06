@@ -100,7 +100,7 @@ const options2 = {
   pieHole: 0.4,
   is3D: false,
   backgroundColor: "transparent",
-  colors: ["#ffd60a", "#1b4965", "#003566", '#023e8a']
+  colors: ["#012a4a", "#013a63", "#01497c", '#014f86', '#2a6f97', '#2c7da0', '#ffa200', '#ffaa00', '#ffb700', '#ffc300', '#ffd000', '#ffdd00', '#ffea00']
 };
 
 
