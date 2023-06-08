@@ -34,8 +34,6 @@ const Deputado = ({ deputado }) => {
 
 useEffect(() => {
   let contagem = [];
-
-
   // Itere sobre o array
   for (let i = 0; i < data.length; i++) {
     let valorAtributo = data[i]['tipoDespesa'];
@@ -47,12 +45,12 @@ useEffect(() => {
     }
   }
 
-  const davi = []
+  const graficoDonut = [['Tipo Despesa', 'Porcentagem']]
   for(let i in contagem){
-    davi.push([i, contagem[i]])
+    graficoDonut.push([i, contagem[i]])
   }
-  console.log(davi);
-  setContagemElemento(davi)
+  console.log(graficoDonut);
+  setContagemElemento(graficoDonut)
  
 }, [data])
 
@@ -89,20 +87,21 @@ const estados = [
 const options_estados = {
   region: 'BR',
   resolution: 'provinces',
-  colorAxis: { colors: ["#00853f", "black", "#e31b23"] },
+  colors: ['#FF0000'],
   backgroundColor: "transparent",
   datalessRegionColor: "transparent",
 
 };
 
 const options2 = {
-  title: "My Daily Activities",
   pieHole: 0.4,
   is3D: false,
   backgroundColor: "transparent",
-  colors: ["#012a4a", "#013a63", "#01497c", '#014f86', '#2a6f97', '#2c7da0', '#ffa200', '#ffaa00', '#ffb700', '#ffc300', '#ffd000', '#ffdd00', '#ffea00']
+  colors: ["#012a4a", '#ffa200' ,"#013a63", "#01497c", '#014f86', '#2a6f97', '#2c7da0', '#ffaa00', '#ffb700', '#ffc300', '#ffd000', '#ffdd00', '#ffea00'],
+  legend: {textStyle: {color: 'white'}}
 };
 
+console.log(contagemElemento)
 
   return (
     <Pagina >
@@ -133,14 +132,12 @@ const options2 = {
              <Card border="success" className={styles.infoPessoal}>
               <Card.Header className={styles.titulo}>Dados Eleitorais</Card.Header>
               <Card.Body bg='white' >
-              <p><strong>Nome Eleitoral: </strong> {deputado.ultimoStatus.nomeEleitoral}</p>
-              <p><strong>Partido: </strong> {deputado.ultimoStatus.siglaPartido}</p>
-              <p><strong>ID: </strong> {deputado.ultimoStatus.idLegislatura}</p>
-              <p><strong>UF: </strong> {deputado.ultimoStatus.siglaUf}</p>
-              <p><strong>Situação: </strong> {deputado.ultimoStatus.situacao}</p>
-              <p><strong>Condição Eleitoral: </strong> {deputado.ultimoStatus.condicaoEleitoral}</p>
-      
-             
+                <p><strong>Nome Eleitoral: </strong> {deputado.ultimoStatus.nomeEleitoral}</p>
+                <p><strong>Partido: </strong> {deputado.ultimoStatus.siglaPartido}</p>
+                <p><strong>ID: </strong> {deputado.ultimoStatus.idLegislatura}</p>
+                <p><strong>UF: </strong> {deputado.ultimoStatus.siglaUf}</p>
+                <p><strong>Situação: </strong> {deputado.ultimoStatus.situacao}</p>
+                <p><strong>Condição Eleitoral: </strong> {deputado.ultimoStatus.condicaoEleitoral}</p>
               </Card.Body>
             </Card>
             </Col>
@@ -167,12 +164,12 @@ const options2 = {
       height={"400px"}
       />
       </div> 
-
+      <h2 className={styles.subtitulo}>Porcentagem de elementos de despesas.</h2>
       <Chart
         chartType="PieChart"
         width="100%"
         height="400px"
-        data={elementoDespesa}
+        data={contagemElemento}
         options={options2}
       />
 
