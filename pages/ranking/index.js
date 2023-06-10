@@ -1,29 +1,33 @@
-import Pagina from '@/components/Pagina'
-import React from 'react'
-import { Chart } from "react-google-charts";
+import Pagina from '@/components/Pagina';
+import banco from '@/services/banco';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-const ranking = () => {
-  
+const MyPage = () => {
+  const [dadosDeputados, setDadosDeputados] = useState([]);
+
+
+  useEffect(() => {
+    banco.get("/").then((resultado) => {
+      setDadosDeputados(resultado.data);
+    });
+  }, []);
+
+
   return (
     <Pagina>
-     
+    <div>
+      <ol>
+        {dadosDeputados.map((deputado, index) => (
+          <li key={index}>
+            Nome: {deputado.nome}<br />
+            Valor Gasto: {deputado.valor_gasto}<br />
+          </li>
+        ))}
+      </ol>
+    </div>
     </Pagina>
-  )
-}
-
-export default ranking
-
-export const data = [
-  ['State', 'City'],
-  ['BR-MG', 'Minas Gerais'],
-];
-
-export const options = {
-  region: 'BR',
-  resolution: 'provinces',
-  colorAxis: { colors: ["#00853f", "black", "#e31b23"] },
-  backgroundColor: "transparent",
-  datalessRegionColor: "transparent",
-
-
+  );
 };
+
+export default MyPage;
