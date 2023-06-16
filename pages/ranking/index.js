@@ -2,6 +2,7 @@ import Pagina from '@/components/Pagina';
 import banco from '@/services/banco';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Item_Ranking from '@/components/Ranking';
 
 const MyPage = () => {
   const [dadosDeputados, setDadosDeputados] = useState([]);
@@ -13,18 +14,15 @@ const MyPage = () => {
     });
   }, []);
 
-
   return (
     <Pagina>
     <div>
-      <ol>
+
+    <h2 className='text-center p-5'>Os Deputados que Mais Gastaram</h2>
+
         {dadosDeputados.map((deputado, index) => (
-          <li key={index}>
-            Nome: {deputado.nome}<br />
-            Valor Gasto: {deputado.valor_gasto}<br />
-          </li>
+          <Item_Ranking nome={deputado.nome} numero={deputado.numero} valor={deputado.valor_gasto}/>
         ))}
-      </ol>
     </div>
     </Pagina>
   );
