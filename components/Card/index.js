@@ -3,9 +3,10 @@ import styles from "./Card.module.css";
 import { MdLocationPin } from "react-icons/md";
 import { MdWorkspaces } from "react-icons/md";
 import { MdOutlineCallMade } from "react-icons/md";
+import { GiRibbonMedal } from "react-icons/gi";
 import Link from "next/link";
 
-const Card = ({ nome, partido, id, estado, imagem }) => {
+const Card = ({ nome, partido, id, estado, imagem, posicao }) => {
   return (
     <div className={styles.card}>
       <div>
@@ -25,6 +26,12 @@ const Card = ({ nome, partido, id, estado, imagem }) => {
           <div className={styles.info}>
             <MdWorkspaces />
             {partido}
+          </div>
+
+          <div className={styles.info}>
+          <GiRibbonMedal />
+           
+            {posicao}
           </div>
         </div>
 

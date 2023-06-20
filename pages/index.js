@@ -7,25 +7,47 @@ import Head from "next/head";
 import apiDeputados from "@/services/apiDeputados";
 import styles from "@/styles/Home.module.css";
 import InfiniteScroll from "react-infinite-scroll-component";
+import banco from "@/services/banco";
+import { FaRankingStar } from "react-icons/fa";
 
-const Index = ( {listaCompletaDeputados} ) => {
+
+const Index = ({ listaCompletaDeputados }) => {
+
 
   const [partidos, setPartidos] = useState([]);
-  const [deputados, setDeputados] = useState();
-  
+  const [dadosDeputados, setDadosDeputados] = useState([]);
+
+  useEffect(() => {
+    banco.get("/", {
+      params: {
+        _sort: 'total_gastos',
+        _order: 'desc'
+      }
+    })
+      .then((resultado) => {
+        setDadosDeputados(resultado.data);
+      })
+      .catch((error) => {
+        console.error(error);
+        console.log("rank temporariamente off");
+      });
+  }, []);
+
+
   // infinity scrolll
 
   const [Deputados, setdeputados] = useState([]);
-
   let [page, setPage] = useState(1)
 
   useEffect(() => {
     carregarDeputados()
   }, [])
 
-  function carregarDeputados(){
-    setPage(page + 1)
-    apiDeputados.get('/deputados?itens=20&pagina=' + page).then(resultado =>{
+  function carregarDeputados() {
+    
+      
+     setPage(page + 1)
+    apiDeputados.get('/deputados?itens=20&pagina=' + page).then(resultado => {
       setdeputados(Deputados.concat(resultado.data.dados))
     })
   }
@@ -53,6 +75,33 @@ const Index = ( {listaCompletaDeputados} ) => {
     });
 
     setdeputados(deputadosFiltrados);
+  }
+
+  console.log(dadosDeputados);
+  function CardDeputados({item}) {
+
+    let posicao = 0
+    /**
+     * 
+    */
+    dadosDeputados.map(itemDeputado=>{
+      if(item.id == itemDeputado.deputado_id){
+        posicao = itemDeputado.numero
+      }
+    })
+
+    return (
+      <Col className="mb-4">
+        <Card
+          nome={item.nome}
+          estado={item.siglaUf}
+          partido={item.siglaPartido.slice(0, 5)}
+          imagem={item.urlFoto}
+          id={item.id}
+          posicao={posicao + '°'}
+        />
+      </Col>
+    )
   }
 
 
@@ -87,7 +136,7 @@ const Index = ( {listaCompletaDeputados} ) => {
         </Row>
 
         <br />
-        
+
 
         <Row>
           <Col md={2}>
@@ -110,61 +159,53 @@ const Index = ( {listaCompletaDeputados} ) => {
               title="UF"
               onSelect={filtraDeputadosUF}
             >
-             
-                <Dropdown.Item eventKey="AC" key="AC">AC</Dropdown.Item>
-                <Dropdown.Item eventKey="AL" key="AL">AL</Dropdown.Item>
-                <Dropdown.Item eventKey="AP" key="AP">AP</Dropdown.Item>
-                <Dropdown.Item eventKey="AM" key="AM">AM</Dropdown.Item>
-                <Dropdown.Item eventKey="BA" key="BA">BA</Dropdown.Item>
-                <Dropdown.Item eventKey="CE" key="CE">CE</Dropdown.Item>
-                <Dropdown.Item eventKey="DF" key="DF">DF</Dropdown.Item>
-                <Dropdown.Item eventKey="ES" key="ES">ES</Dropdown.Item>
-                <Dropdown.Item eventKey="GO" key="GO">GO</Dropdown.Item>
-                <Dropdown.Item eventKey="MA" key="MA">MA</Dropdown.Item>
-                <Dropdown.Item eventKey="MT" key="MT">MT</Dropdown.Item>
-                <Dropdown.Item eventKey="MS" key="MS">MS</Dropdown.Item>
-                <Dropdown.Item eventKey="MG" key="MG">MG</Dropdown.Item>
-                <Dropdown.Item eventKey="PA" key="PA">PA</Dropdown.Item>
-                <Dropdown.Item eventKey="PB" key="PB">PB</Dropdown.Item>
-                <Dropdown.Item eventKey="PR" key="PR">PR</Dropdown.Item>
-                <Dropdown.Item eventKey="PE" key="PE">PE</Dropdown.Item>
-                <Dropdown.Item eventKey="PI" key="PI">PI</Dropdown.Item>
-                <Dropdown.Item eventKey="RJ" key="RJ">RJ</Dropdown.Item>
-                <Dropdown.Item eventKey="RN" key="RN">RN</Dropdown.Item>
-                <Dropdown.Item eventKey="RS" key="RS">RS</Dropdown.Item>
-                <Dropdown.Item eventKey="RO" key="RO">RO</Dropdown.Item>
-                <Dropdown.Item eventKey="RR" key="RR">RR</Dropdown.Item>
-                <Dropdown.Item eventKey="SC" key="SC">SC</Dropdown.Item>
-                <Dropdown.Item eventKey="SP" key="SP">SP</Dropdown.Item>
-                <Dropdown.Item eventKey="SE" key="SE">SE</Dropdown.Item>
-                <Dropdown.Item eventKey="TO" key="TO">TO</Dropdown.Item>
-          
+
+              <Dropdown.Item eventKey="AC" key="AC">AC</Dropdown.Item>
+              <Dropdown.Item eventKey="AL" key="AL">AL</Dropdown.Item>
+              <Dropdown.Item eventKey="AP" key="AP">AP</Dropdown.Item>
+              <Dropdown.Item eventKey="AM" key="AM">AM</Dropdown.Item>
+              <Dropdown.Item eventKey="BA" key="BA">BA</Dropdown.Item>
+              <Dropdown.Item eventKey="CE" key="CE">CE</Dropdown.Item>
+              <Dropdown.Item eventKey="DF" key="DF">DF</Dropdown.Item>
+              <Dropdown.Item eventKey="ES" key="ES">ES</Dropdown.Item>
+              <Dropdown.Item eventKey="GO" key="GO">GO</Dropdown.Item>
+              <Dropdown.Item eventKey="MA" key="MA">MA</Dropdown.Item>
+              <Dropdown.Item eventKey="MT" key="MT">MT</Dropdown.Item>
+              <Dropdown.Item eventKey="MS" key="MS">MS</Dropdown.Item>
+              <Dropdown.Item eventKey="MG" key="MG">MG</Dropdown.Item>
+              <Dropdown.Item eventKey="PA" key="PA">PA</Dropdown.Item>
+              <Dropdown.Item eventKey="PB" key="PB">PB</Dropdown.Item>
+              <Dropdown.Item eventKey="PR" key="PR">PR</Dropdown.Item>
+              <Dropdown.Item eventKey="PE" key="PE">PE</Dropdown.Item>
+              <Dropdown.Item eventKey="PI" key="PI">PI</Dropdown.Item>
+              <Dropdown.Item eventKey="RJ" key="RJ">RJ</Dropdown.Item>
+              <Dropdown.Item eventKey="RN" key="RN">RN</Dropdown.Item>
+              <Dropdown.Item eventKey="RS" key="RS">RS</Dropdown.Item>
+              <Dropdown.Item eventKey="RO" key="RO">RO</Dropdown.Item>
+              <Dropdown.Item eventKey="RR" key="RR">RR</Dropdown.Item>
+              <Dropdown.Item eventKey="SC" key="SC">SC</Dropdown.Item>
+              <Dropdown.Item eventKey="SP" key="SP">SP</Dropdown.Item>
+              <Dropdown.Item eventKey="SE" key="SE">SE</Dropdown.Item>
+              <Dropdown.Item eventKey="TO" key="TO">TO</Dropdown.Item>
+
             </DropdownButton>
           </Col>
         </Row>
 
-        <br /> 
-          <InfiniteScroll 
+        <br />
+        <InfiniteScroll
           dataLength={Deputados.length}
           hasMore={true}
           next={carregarDeputados}
           style={{ display: 'flex', overflow: '100%' }}
-          >
-            <Row  className={styles.deputados}>
-          {Deputados.map((item) => (
-            <Col className="mb-4">
-              <Card
-                nome={item.nome}
-                estado={item.siglaUf}
-                partido={item.siglaPartido}
-                imagem={item.urlFoto}
-                id={item.id}
-              />
-            </Col>
-          ))}
-        </Row>
-          </InfiniteScroll>
-        
+        >
+          <Row className={styles.deputados}>
+            {Deputados.map((item) => (
+              <CardDeputados item={item} />
+            ))}
+          </Row>
+        </InfiniteScroll>
+
 
       </Pagina>
     </>

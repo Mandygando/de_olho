@@ -27,8 +27,9 @@
 .infoDeputado {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     font-size: 23px;
+    gap: 12px;
     margin-top: 20px;
 }
 
@@ -56,6 +57,9 @@
     transition: 1s all;
 }
 
+.teste {
+    display: flex;
+}
 
 .botao:hover{
     color: #fff;

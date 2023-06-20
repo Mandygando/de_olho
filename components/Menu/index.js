@@ -30,18 +30,7 @@ const Menu = () => {
 
         <Link href={'/quemsomos'} className={styles.link}>
             Quem Somos
-        </Link>
-
-    <Form variant="" className="d-flex">
-            <Form.Control
-              variant="outline-white"
-              type="search"
-              placeholder="Search"
-              className="me-2 text-white outline-dark bg-dark"
-              aria-label="Search"
-            />
-          </Form>
-   
+        </Link>   
     </div>
  
 </nav>

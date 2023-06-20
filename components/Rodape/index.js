@@ -6,8 +6,8 @@ import { AiFillGithub,AiOutlineInstagram,AiFillLinkedin } from 'react-icons/ai';
 
 const Rodape = () => {
   return (
-    <div style={{backgroundColor:'#202632', width:"100%"}} className=' text-white text-center  bottom-0'>
-      <Row className='p-5'>
+    
+      <Row className='p-5'  style={{backgroundColor:'#202632', width:"100%"}}>
         <Col md={6} className='text-center'>
          <h2><img width={60} src='/images/logo.png'/>  De Olho</h2>
          <br></br>
@@ -15,11 +15,12 @@ const Rodape = () => {
         </Col>
         <Col md={6} className='text-center'>
           <h5>Made in CeiLondres</h5>
-          <>Projeto Desenvolvido para fins educativos e estatísticos0</>
+          <>Projeto Desenvolvido para fins educativos e estatísticos</><br></br>
+          <>Dados provenientes de Dados Abertos da Câmara dos Deputados</>
 
         </Col>
       </Row>
-    </div>
+   
   )
 }
 
