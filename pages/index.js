@@ -10,20 +10,21 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import banco from "@/services/banco";
 import { FaRankingStar } from "react-icons/fa";
 
-
 const Index = ({ listaCompletaDeputados }) => {
-
-
   const [partidos, setPartidos] = useState([]);
   const [dadosDeputados, setDadosDeputados] = useState([]);
+  const [Deputados, setDeputados] = useState([]);
+  const [page, setPage] = useState(1);
+  const [filtroAplicado, setFiltroAplicado] = useState(false); // Nova variável de estado
 
   useEffect(() => {
-    banco.get("/", {
-      params: {
-        _sort: 'total_gastos',
-        _order: 'desc'
-      }
-    })
+    banco
+      .get("/", {
+        params: {
+          _sort: "total_gastos",
+          _order: "desc",
+        },
+      })
       .then((resultado) => {
         setDadosDeputados(resultado.data);
       })
@@ -33,40 +34,32 @@ const Index = ({ listaCompletaDeputados }) => {
       });
   }, []);
 
-
-  // infinity scrolll
-
-  const [Deputados, setdeputados] = useState([]);
-  let [page, setPage] = useState(1)
-
-  useEffect(() => {
-    carregarDeputados()
-  }, [])
-
-  function carregarDeputados() {
-    
-      
-     setPage(page + 1)
-    apiDeputados.get('/deputados?itens=20&pagina=' + page).then(resultado => {
-      setdeputados(Deputados.concat(resultado.data.dados))
-    })
-  }
-
-  // infinity scrolll
-
   useEffect(() => {
     apiDeputados.get("/partidos?itens=30").then((resultado) => {
       setPartidos(resultado.data.dados);
     });
   }, []);
 
+  useEffect(() => {
+    carregarDeputados();
+  }, []);
+
+  function carregarDeputados() {
+    setPage(page + 1);
+    apiDeputados
+      .get('/deputados?itens=20&pagina=' + page)
+      .then((resultado) => {
+        setDeputados(Deputados.concat(resultado.data.dados));
+      });
+  }
 
   function filtraDeputados(e) {
     const deputadosFiltrados = listaCompletaDeputados.filter((deputado) => {
       return deputado.siglaPartido === e;
     });
 
-    setdeputados(deputadosFiltrados);
+    setDeputados(deputadosFiltrados);
+    setFiltroAplicado(true); // Atualiza o estado do filtro para true
   }
 
   function filtraDeputadosUF(e) {
@@ -74,21 +67,18 @@ const Index = ({ listaCompletaDeputados }) => {
       return deputado.siglaUf === e;
     });
 
-    setdeputados(deputadosFiltrados);
+    setDeputados(deputadosFiltrados);
+    setFiltroAplicado(true); // Atualiza o estado do filtro para true
   }
 
-  console.log(dadosDeputados);
-  function CardDeputados({item}) {
+  function CardDeputados({ item }) {
+    let posicao = 0;
 
-    let posicao = 0
-    /**
-     * 
-    */
-    dadosDeputados.map(itemDeputado=>{
-      if(item.id == itemDeputado.deputado_id){
-        posicao = itemDeputado.numero
+    dadosDeputados.map((itemDeputado) => {
+      if (item.id == itemDeputado.deputado_id) {
+        posicao = itemDeputado.numero;
       }
-    })
+    });
 
     return (
       <Col className="mb-4">
@@ -98,12 +88,11 @@ const Index = ({ listaCompletaDeputados }) => {
           partido={item.siglaPartido.slice(0, 5)}
           imagem={item.urlFoto}
           id={item.id}
-          posicao={posicao + '°'}
+          posicao={posicao + "°"}
         />
       </Col>
-    )
+    );
   }
-
 
   return (
     <>
@@ -137,7 +126,6 @@ const Index = ({ listaCompletaDeputados }) => {
 
         <br />
 
-
         <Row>
           <Col md={2}>
             <DropdownButton
@@ -146,10 +134,11 @@ const Index = ({ listaCompletaDeputados }) => {
               title="Partidos"
               onSelect={filtraDeputados}
             >
-              {partidos.map(item => (
-                <Dropdown.Item eventKey={item.sigla} key={item.id}>{item.nome}</Dropdown.Item>
+              {partidos.map((item) => (
+                <Dropdown.Item eventKey={item.sigla} key={item.id}>
+                  {item.nome}
+                </Dropdown.Item>
               ))}
-
             </DropdownButton>
           </Col>
           <Col md={1}>
@@ -159,8 +148,7 @@ const Index = ({ listaCompletaDeputados }) => {
               title="UF"
               onSelect={filtraDeputadosUF}
             >
-
-              <Dropdown.Item eventKey="AC" key="AC">AC</Dropdown.Item>
+                <Dropdown.Item eventKey="AC" key="AC">AC</Dropdown.Item>
               <Dropdown.Item eventKey="AL" key="AL">AL</Dropdown.Item>
               <Dropdown.Item eventKey="AP" key="AP">AP</Dropdown.Item>
               <Dropdown.Item eventKey="AM" key="AM">AM</Dropdown.Item>
@@ -187,7 +175,6 @@ const Index = ({ listaCompletaDeputados }) => {
               <Dropdown.Item eventKey="SP" key="SP">SP</Dropdown.Item>
               <Dropdown.Item eventKey="SE" key="SE">SE</Dropdown.Item>
               <Dropdown.Item eventKey="TO" key="TO">TO</Dropdown.Item>
-
             </DropdownButton>
           </Col>
         </Row>
@@ -195,9 +182,9 @@ const Index = ({ listaCompletaDeputados }) => {
         <br />
         <InfiniteScroll
           dataLength={Deputados.length}
-          hasMore={true}
+          hasMore={!filtroAplicado} // Desativa o Infinite Scroll quando o filtro for aplicado
           next={carregarDeputados}
-          style={{ display: 'flex', overflow: '100%' }}
+          style={{ display: "flex", overflow: "100%" }}
         >
           <Row className={styles.deputados}>
             {Deputados.map((item) => (
@@ -205,8 +192,6 @@ const Index = ({ listaCompletaDeputados }) => {
             ))}
           </Row>
         </InfiniteScroll>
-
-
       </Pagina>
     </>
   );
@@ -215,7 +200,7 @@ const Index = ({ listaCompletaDeputados }) => {
 export default Index;
 
 export async function getServerSideProps(context) {
-  const response = await apiDeputados.get('/deputados');
+  const response = await apiDeputados.get("/deputados");
   const listaCompletaDeputados = response.data.dados;
 
   return {

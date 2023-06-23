@@ -64,6 +64,9 @@ const options = {
   vAxis: {
     textPosition: 'none'
   },
+  legend: {
+    display: false
+},
   hAxis: {textStyle: { color: '#fff'}},
   annotations: {
     textStyle: {
