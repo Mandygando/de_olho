@@ -15,7 +15,7 @@ const Index = ({ listaCompletaDeputados }) => {
   const [dadosDeputados, setDadosDeputados] = useState([]);
   const [Deputados, setDeputados] = useState([]);
   const [page, setPage] = useState(1);
-  const [filtroAplicado, setFiltroAplicado] = useState(false); // Nova variável de estado
+  const [filtroAplicado, setFiltroAplicado] = useState(false); 
 
   useEffect(() => {
     banco
@@ -59,7 +59,7 @@ const Index = ({ listaCompletaDeputados }) => {
     });
 
     setDeputados(deputadosFiltrados);
-    setFiltroAplicado(true); // Atualiza o estado do filtro para true
+    setFiltroAplicado(true);
   }
 
   function filtraDeputadosUF(e) {
@@ -68,7 +68,7 @@ const Index = ({ listaCompletaDeputados }) => {
     });
 
     setDeputados(deputadosFiltrados);
-    setFiltroAplicado(true); // Atualiza o estado do filtro para true
+    setFiltroAplicado(true); 
   }
 
   function CardDeputados({ item }) {
@@ -88,7 +88,7 @@ const Index = ({ listaCompletaDeputados }) => {
           partido={item.siglaPartido.slice(0, 5)}
           imagem={item.urlFoto}
           id={item.id}
-          posicao={posicao + "°"}
+          posicao={posicao ? posicao + "°": ''}
         />
       </Col>
     );
@@ -182,7 +182,7 @@ const Index = ({ listaCompletaDeputados }) => {
         <br />
         <InfiniteScroll
           dataLength={Deputados.length}
-          hasMore={!filtroAplicado} // Desativa o Infinite Scroll quando o filtro for aplicado
+          hasMore={!filtroAplicado} 
           next={carregarDeputados}
           style={{ display: "flex", overflow: "100%" }}
         >

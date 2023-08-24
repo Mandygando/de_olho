@@ -5,6 +5,7 @@ import { Card, Col, Row } from 'react-bootstrap'
 import styles from './Deputado.module.css'
 import Chart from 'react-google-charts'
 import { useRouter } from 'next/router'
+const date = new Date();
 
 const Deputado = ({ deputado }) => {
 
@@ -14,9 +15,8 @@ const Deputado = ({ deputado }) => {
   const [elementoDespesa, setelementoDespesa] = useState()  
   const [contagemElemento, setContagemElemento] = useState()
 
-
   useEffect(() => {
-      apiDeputados.get('/deputados/' + id2 + '/despesas?ano=2023&mes=4').then(resultado => {
+      apiDeputados.get('/deputados/' + id2 + `/despesas?ano=${date.getFullYear()}&mes=${date.getMonth()}`).then(resultado => {
           setData(resultado.data.dados)
       })
   }, [])

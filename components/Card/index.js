@@ -29,7 +29,13 @@ const Card = ({ nome, partido, id, estado, imagem, posicao }) => {
           </div>
 
           <div className={styles.info}>
-          <GiRibbonMedal />
+            {
+              posicao 
+              ?
+              <GiRibbonMedal />
+              :
+              ''
+            }
            
             {posicao}
           </div>
