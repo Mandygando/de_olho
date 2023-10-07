@@ -28,7 +28,7 @@ const MyPage = () => {
       <div>
         <h2 className='text-center p-5'>Os 10 Deputados que Mais Gastaram</h2>
         {dadosDeputados.slice(0, 10).map((deputado, index) => (
-          <Item_Ranking nome={deputado.nome} numero={deputado.numero} valor={deputado.valor_gasto} key={index} />
+          <Item_Ranking nome={deputado.nome} numero={index +1} valor={deputado.valor_gasto} key={index} />
         ))}
       </div>
     </Pagina>

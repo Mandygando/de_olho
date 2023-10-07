@@ -5,6 +5,7 @@ import { Card, Col, Row } from 'react-bootstrap'
 import styles from './Deputado.module.css'
 import Chart from 'react-google-charts'
 import { useRouter } from 'next/router'
+import CardValor from '@/components/CardValor'
 const date = new Date();
 
 const Deputado = ({ deputado }) => {
@@ -14,9 +15,10 @@ const Deputado = ({ deputado }) => {
   const [data, setData] = useState([])  
   const [elementoDespesa, setelementoDespesa] = useState()  
   const [contagemElemento, setContagemElemento] = useState()
+  const [valorTotal, setValorTotal] = useState()
 
   useEffect(() => {
-      apiDeputados.get('/deputados/' + id2 + `/despesas?ano=${date.getFullYear()}&mes=${date.getMonth()}`).then(resultado => {
+      apiDeputados.get('/deputados/' + id2 + `/despesas?itens=100&ano=${date.getFullYear()}&mes=${date.getMonth()}`).then(resultado => {
           setData(resultado.data.dados)
       })
   }, [])
@@ -27,14 +29,12 @@ const Deputado = ({ deputado }) => {
       despesas.push([item.tipoDespesa, item.valorDocumento, new Date(item.dataDocumento).toLocaleDateString()])
     ))}
     setelementoDespesa(despesas)
-    console.log(despesas)
-    
+    const totalValor = despesas.slice(1).reduce((total, despesa) => total + despesa[1], 0);
+    setValorTotal(totalValor)
 }, [data])
-
 
 useEffect(() => {
   let contagem = [];
-  // Itere sobre o array
   for (let i = 0; i < data.length; i++) {
     let valorAtributo = data[i]['tipoDespesa'];
 
@@ -49,7 +49,6 @@ useEffect(() => {
   for(let i in contagem){
     graficoDonut.push([i, contagem[i]])
   }
-  console.log(graficoDonut);
   setContagemElemento(graficoDonut)
  
 }, [data])
@@ -59,6 +58,8 @@ const options = {
   colors: ["#057447"],
   backgroundColor: '#202632',
   chartArea: {
+    top: 25,
+    bottom: 0,
     backgroundColor: '#202632'
   },
   vAxis: {
@@ -75,8 +76,8 @@ const options = {
       auraColor: '#ffff',
     },
   },
-  bar: { groupWidth: "90%" },
-  height: 1000,
+  bar: { groupWidth: "95%" },
+  height: data.length > 20 ? 2000: 800,
 };
 
 var siglaUf = deputado.ultimoStatus.siglaUf;
@@ -103,8 +104,6 @@ const options2 = {
   colors: ["#012a4a", '#ffa200' ,"#013a63", "#01497c", '#014f86', '#2a6f97', '#2c7da0', '#ffaa00', '#ffb700', '#ffc300', '#ffd000', '#ffdd00', '#ffea00'],
   legend: {textStyle: {color: 'white'}}
 };
-
-console.log(contagemElemento)
 
   return (
     <Pagina >
@@ -157,14 +156,14 @@ console.log(contagemElemento)
             </div>
 
         <h2 className={styles.subtitulo}>Gastos do deputado no último mês.</h2>
-
+        <CardValor valor={Math.floor(valorTotal)} />
       <div className={styles.graficoBarras}>
       <Chart
       chartType="BarChart"
       data={elementoDespesa}
       options={options}
       width={"100%"}
-      height={"400px"}
+      height={"2000px"}
       />
       </div> 
       <h2 className={styles.subtitulo}>Porcentagem de elementos de despesas.</h2>
@@ -175,8 +174,6 @@ console.log(contagemElemento)
         data={contagemElemento}
         options={options2}
       />
-
-      <div style={{height:'600px'}}></div>
     
     </Pagina>
   )
